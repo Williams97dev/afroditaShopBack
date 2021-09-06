@@ -1,0 +1,30 @@
+extends ../layouts/layout_products.pug
+
+block main
+  if product 
+    h3.title.is_3 Realiza los cambios sobre el producto
+    form(action="/products/update", method="POST")
+        .field
+            label.label Nombre
+            .control
+                input.input(type="text", name="name", value= product.name)
+        
+        .field
+            label.label Description
+            .control
+                input.input(type="text", name="description", value= product.description)
+
+        .field
+            label.label Precio
+            .control
+                input.input(type="text", name="price", value= product.price)
+        
+        .field
+            label.label Categoria 
+            .control
+                input.input(type="text", name="category", value= product.category)
+        input(type="hidden", name="productId", value=product.id)
+        .control 
+            button.button.is-info.is-fullwidth Enviar 
+  else 
+    p No existe el producto que quieres editar

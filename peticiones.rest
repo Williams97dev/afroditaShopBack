@@ -1,0 +1,56 @@
+GET http://localhost:3000/api/products/v2
+
+###
+
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "name":"Cartera Dior",
+  "description":"Altas calidades",
+  "price":478,
+  "category":"accesorios"
+}
+
+###
+
+PUT http://localhost:3000/api/products/4
+Content-Type: application/json
+
+{
+  "name":"Camiseta verde",
+  "description":"muy bonita",
+  "price":24,
+  "category":"moda"
+}
+
+
+###
+
+DELETE http://localhost:3000/api/products/5
+
+###
+
+GET http://localhost:3000/api/products/1/v2
+
+###
+
+GET http://localhost:3000/api/products/cat/oficina
+
+###
+
+GET http://localhost:3000/api/clients
+
+
+###
+GET http://localhost:3000/api/public_products
+
+
+
+###
+GET http://localhost:3000/api/public_products/5
+
+
+
+###
+GET http://localhost:3000/api/public_products/cat/moda

@@ -1,0 +1,65 @@
+extends ../layouts/layout_products.pug
+
+block main
+	if message.length > 0
+		script.
+			Swal.fire("#{message[0]}");
+
+	h3.title.is-3  Listado de productos (#{products.length})
+	h4.title.is-4 Pagina #{page}
+	.page-buttons.mb-4 
+		if page !== 1
+			a.button(href="?page="+(page-1)) Previous
+		else 
+			a.button(disabled) Previous
+		
+		if products.length <5
+			a.button(disabled) Next
+		else 
+			a.button(href="?page="+(page+1)) Next
+	table.table.is-fullwidth.is-striped.is-bordered 
+		thead
+			tr
+				th Nombre
+				th Descripción
+				th Precio
+				th Categoría
+				th Disponible
+				th Acciones
+		tbody
+			each product in products 
+				tr 
+					td= product.name 
+					td= product.description
+					td #{product.price}€
+					td= product.category
+					td= (product.available === 1) ? 'SI 🥳' : 'NO 😡'
+					td
+						a.button.is-small.mr-1(href="/products/"+product.id) 👁️
+						a.button.is-small.mr-1(href="/products/edit/"+product.id) ✍️
+						a.button.is-small(href="/products/remove/"+product.id,onclick='return confirm("Seguro que quieres borrarlo?")') 🗑️
+						a#borradoRapido.button.is-small(data-productid=product.id) 🧹
+
+	.products
+		each product in products
+			.card
+				header.card-header
+						p.card-header-title= product.name 
+				.card-content
+						.content
+							p= product.description
+							p #{product.price}€
+				footer.card-footer
+						a.card-footer-item(href='/products/'+product.id) View
+						a.card-footer-item(href='/products/edit/'+product.id) Edit
+						a.card-footer-item(href='/products/remove/'+product.id, onclick='return confirm("Seguro que quieres borrarlo?")') Delete
+	script.
+		const botones  = document.querySelectorAll('#borradoRapido');
+
+		 for(let boton of botones) {
+			 	boton.addEventListener('click', function(event){
+				console.log(boton.dataset.productid)
+
+			 })
+		 }
+
